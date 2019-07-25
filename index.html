@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<pre style="background: #000;color: #666;display: inline-block;padding: 1em;font-size: 300%;"/>
+<script>
+let H="TOLV,ETT,TVÅ,TRE,FYRA,FEM,SEX,SJU,ÅTTA,NIO,TIO,ELVA,TOLV".split(","),M=["",,,,,"FEM ÖVER",,,,,"TIO ÖVER",,,,,"KVART ÖVER",,,,,"TJUGO ÖVER",,,,,"FEM I HALV",,,,,"HALV",,,,,"FEM ÖVER HALV",,,,,"TJUGO I",,,,,"KVART I",,,,,"TIO I",,,,,"FEM I"],getTime=n=>{let t=5*~~(n.getMinutes()/5);return`KLOCKAN ÄR ${M[t]} ${H[(n.getHours()+(t<25?0:1))%12]}`},boardTokens=["KLOCKAN"," ","ÄR","\n",H[5],"KVARTIO","\n","TJUGO"," ","ÖVER","\n","I"," ","HALV"," ",H[1],"\n",H[2],H[3],H[4],"\n",H[5],H[6]," ",H[7],"\n",H[8],H[9],"TIO","\n",H[11],"  ",H[12]];function html(){let n=getTime(new Date).split(" ");return boardTokens.map(t=>{if(!n.length)return t;if(t===n[0])return`<span style="color:#fff">${n.shift()}</span>`;if(t.includes(n[0])){let T=t.split(n[0]);return`${T[0]}<span style="color:#fff">${n.shift()}</span>${T[1]||""}`}return t}).join("")}
+function tick() {document.querySelector("pre").innerHTML = html()}
+setInterval(tick, 1000);
+</script>
